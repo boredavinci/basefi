@@ -29,6 +29,10 @@
   );
 }
 
+.card2 {
+  @apply rounded-3xl bg-white/50 shadow-2xl shadow-lime-300;
+}
+
 body {
   border: 18px solid rgba(0, 255, 238, 0.3);
   background-size: 160px 160px;
