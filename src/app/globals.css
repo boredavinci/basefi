@@ -1,3 +1,52 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* body {
+  background: linear-gradient(-45deg, #ffffff, #ffafcf, #7895ff, #6bffda);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+  height: 100vh;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+} */
+
+.card {
+  background-color: transparent;
+  background-image: linear-gradient(
+    rgb(255, 255, 255, 0.25) 55%,
+    rgb(192, 255, 3, 0.55) 100%
+  );
+}
+
+body {
+  border: 18px solid rgba(0, 255, 238, 0.3);
+  background-size: 160px 160px;
+  background-image: linear-gradient(to right, #f8f0fd 8px, transparent 1px),
+    linear-gradient(to bottom, #f8f0fd 8px, transparent 1px);
+  @apply text-slate-800;
+  height: 100vh;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  @apply font-semibold;
+}
+
+dl {
+  @apply rounded-3xl;
+}

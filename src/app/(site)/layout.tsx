@@ -21,7 +21,7 @@ export default async function MarketingLayout({
           </nav>
         </div>
       </header>
-      <main className='flex-1'>{children}</main>
+      <main className=' container  max-w-[64rem] mb-24'>{children}</main>
       <SiteFooter />
     </div>
   );

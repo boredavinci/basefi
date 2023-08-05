@@ -75,7 +75,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
         chains={chains}
         appInfo={demoAppInfo}
         theme={lightTheme({
-          accentColor: '#2934FF',
+          accentColor: '#0052FF',
           overlayBlur: 'small',
         })}
       >
