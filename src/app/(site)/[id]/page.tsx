@@ -3,7 +3,7 @@ import Stats from '@/components/stats';
 export default function Page() {
   return (
     <div>
-      <h1 className=' text-5xl lg:text-6xl mt-20'>Title </h1>
+      <h1 className=' text-5xl lg:text-6xl mt-20'>Deal title </h1>
       <p className='text-xl mt-6 '>
         Liquorice oat cake icing macaroon sesame snaps chocolate cake jelly
         beans wafer. Cotton candy macaroon jujubes carrot cake cake cookie.
