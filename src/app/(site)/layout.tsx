@@ -17,11 +17,22 @@ export default async function MarketingLayout({
         <div className='flex h-20 items-center justify-between py-6'>
           <MainNav items={marketingConfig.mainNav} />
           <nav>
-            <ConnectButton />
+            <ConnectButton
+              showBalance={{
+                smallScreen: false,
+                largeScreen: true,
+              }}
+              accountStatus={{
+                smallScreen: 'avatar',
+                largeScreen: 'full',
+              }}
+            />
           </nav>
         </div>
       </header>
-      <main className=' container  max-w-[64rem] mb-24'>{children}</main>
+      <main className=' flex flex-col container  max-w-[64rem] mb-24 gap-6'>
+        {children}
+      </main>
       <SiteFooter />
     </div>
   );
