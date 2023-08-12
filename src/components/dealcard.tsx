@@ -1,101 +1,61 @@
+import { useEffect } from 'react';
+
 import Image from 'next/image';
 import Link from 'next/link';
+import { useContractRead } from 'wagmi';
 
 import Status from '@/components/status';
+import { BaseFiFundManager } from '@/contracts/BaseFiFundManager';
+import { BASEFI_FUND_MANAGER } from '@/contracts/addresses';
+import {
+  Fund,
+  FundsDeployed,
+  deals,
+  parseBytes32,
+  parseFund,
+} from '@/service/fund';
 
-const deals = [
-  {
-    name: ' Water Lily Pond',
-    artist: 'Claude Monet',
-    tvl: '32,000,000',
-    juniorapy: '+16%',
-    seniorapy: '4.8%',
-    logoUrl: '/water-lily-pond-harmony-in-green.jpg',
-    url: 'water-lily-pond-harmony-in-green',
-  },
-  {
-    name: 'The Ballet Class',
-    artist: 'Edgar Degas',
-    tvl: '32,000,000',
-    juniorapy: '+16%',
-    seniorapy: '4.8%',
-    logoUrl: '/the-ballet-class.jpg',
-    url: 'the-ballet-class',
-  },
-  {
-    name: 'Bal du moulin',
-    artist: 'Pierre Renoir',
-    tvl: '32,000,000',
-    juniorapy: '+16%',
-    seniorapy: '4.8%',
-    logoUrl: '/bal-du-moulin.jpg',
-    url: 'bal-du-moulin',
-  },
-  {
-    name: 'La Nuit étoilée',
-    artist: 'Vincent Van Gogh',
-    tvl: '32,000,000',
-    juniorapy: '+16%',
-    seniorapy: '4.8%',
-    logoUrl: '/la-nuit-etoilee.jpg',
-    url: 'la-nuit-etoilee',
-  },
-  {
-    name: 'House in provence',
-    artist: 'Paul Cézanne',
-    tvl: '32,000,000',
-    juniorapy: '+16%',
-    seniorapy: '4.8%',
-    logoUrl: '/houses-in-provence.jpg',
-    url: 'houses-in-provence',
-  },
-  {
-    name: 'Irises in Monet’s garden',
-    artist: 'Claude Monet',
-    tvl: '32,000,000',
-    juniorapy: '+16%',
-    seniorapy: '4.8%',
-    logoUrl: '/irises.jpg',
-    url: 'irises',
-  },
-];
+export default function DealCard({ fund, i }: { fund: Fund; i: number }) {
+  const { data: fundData } = useContractRead({
+    address: BASEFI_FUND_MANAGER,
+    abi: BaseFiFundManager,
+    functionName: 'fundMap',
+    args: [parseBytes32(fund.symbol!)],
+    select: parseFund,
+  });
 
-export default function DealCard() {
+  if (!fundData) return null;
+
   return (
-    <ul
-      role='list'
-      className='mx-auto mt-12 grid max-w-2xl grid-cols-1 gap-6 sm:grid-cols-2 lg:mx-0 lg:max-w-none lg:gap-8 text-center grid-flow-row-dense'
+    <Link
+      key={fund.symbol}
+      className='rounded-3xl px-6 py-8 shadow-2xl  shadow-fuchsia-200 h-fit card relative'
+      href={`/${fund.symbol}`}
     >
-      {deals.map((deal) => (
-        <Link
-          key={deal.name}
-          className='rounded-3xl px-6 py-8 shadow-2xl  shadow-fuchsia-200 h-fit card relative'
-          href={deal.url}
-        >
-          <div className='absolute shadow-2xl top-12 right-8'>
-            <Status />
-          </div>
-          <Image
-            className='mx-auto w-full rounded-3xl 24 h-80 object-cover'
-            src={deal.logoUrl}
-            width={400}
-            height={400}
-            alt={deal.name}
-          />
-          <h2 className='mt-6 text-2xl'>{deal.name}</h2>
-          <p className='mt-4 text-xl'>{deal.artist}</p>
-          <div className='flex  mt-6 pt-4 justify-between'>
-            <div className='text-left uppercase'>
-              <p className='text-sm'>Senior APY</p>
-              <p className='mt-1 text-2xl'>{deal.seniorapy}</p>
-            </div>
-            <div className=' text-left uppercase'>
-              <p className='text-xs '>Junior APY</p>
-              <p className='mt-1 text-3xl '>{deal.juniorapy}</p>
-            </div>
-          </div>
-        </Link>
-      ))}
-    </ul>
+      <div className='absolute shadow-2xl top-12 right-8'>
+        <Status stage={fundData.stage} />
+      </div>
+      <Image
+        className='mx-auto w-full rounded-3xl 24 h-80 object-cover'
+        src={(fund.symbol && deals.get(fund.symbol)?.logoUrl) || ''}
+        width={400}
+        height={400}
+        alt={(fund.symbol && deals.get(fund.symbol)?.name) || ''}
+      />
+      <h2 className='mt-6 text-2xl'>{fund.name}</h2>
+      <p className='mt-4 text-xl'>
+        {fund.symbol && deals.get(fund.symbol)?.artist}
+      </p>
+      <div className='flex  mt-6 pt-4 justify-between'>
+        <div className='text-left uppercase'>
+          <p className='text-sm'>Senior APY</p>
+          <p className='mt-1 text-2xl'>{fund.srAPY}%</p>
+        </div>
+        <div className=' text-left uppercase'>
+          <p className='text-xs '>Junior APY</p>
+          <p className='mt-1 text-3xl '>{fund.jrAPY}%</p>
+        </div>
+      </div>
+    </Link>
   );
 }
