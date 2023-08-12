@@ -8,7 +8,7 @@ import { Transactions } from '@/components/transactions';
 export default function Page({ params }: { params: { id: string } }) {
   return (
     <>
-      <h1 className=' text-4xl lg:text-5xl mt-12'>{params.id}</h1>
+      <h1 className=' text-4xl lg:text-5xl mt-12'>Water lily</h1>
       <div className='flex flex-col md:flex-row '>
         <div className='flex flex-col md:w-1/2 mr-6'>
           <Image
@@ -20,14 +20,11 @@ export default function Page({ params }: { params: { id: string } }) {
           />
           <ProductStats />
           <p className='text-md mb-6 font-medium'>
-            Sugar plum jelly beans oat cake tiramisu muffin powder topping. Cake
-            jelly muffin muffin chocolate bar. Gingerbread sweet roll
-            marshmallow donut topping gummi bears liquorice jelly-o. Apple pie
-            donut apple pie ice cream tootsie roll topping tootsie roll. Sweet
-            roll fruitcake jujubes apple pie tootsie roll biscuit brownie
-            topping. Shortbread lollipop lollipop pudding bonbon sesame snaps
-            caramels. Gingerbread muffin candy dessert gummi bears shortbread
-            sweet roll chocolate gummi bears.
+            Water Lilies is a series of approximately 250 oil paintings by
+            French Impressionist Claude Monet (1840–1926). The paintings depict
+            his flower garden at his home in Giverny, and were the main focus of
+            his artistic production during the last thirty years of his life.
+            Many of the works were painted while Monet suffered from cataracts
           </p>
         </div>
 

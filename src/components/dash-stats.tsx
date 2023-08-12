@@ -1,7 +1,9 @@
+import { Badge } from '@/components/ui/badge';
+
 const stats = [
-  { name: 'Title', stat: '250,000' },
-  { name: 'Title', stat: '250,000' },
-  { name: 'Title', stat: '250,000' },
+  { name: 'Total invested', stat: '19,000' },
+  { name: 'Portfolio value', stat: '21,129', percent: '+10%' },
+  { name: 'Total investments', stat: '2' },
 ];
 
 export default function DashStats() {
@@ -11,10 +13,19 @@ export default function DashStats() {
         {stats.map((item) => (
           <div
             key={item.name}
-            className='overflow-hidden px-4 py-5 sm:p-6 card2 uppercase'
+            className='flex overflow-hidden px-4 py-5 sm:p-6 card2 uppercase justify-between'
           >
-            <p className='truncate text-xs'>{item.name}</p>
-            <p className='mt-1 text-3xl'>{item.stat}</p>
+            <div>
+              <p className='text-xs'>{item.name}</p>
+              <p className='mt-1 text-3xl'>{item.stat}</p>
+            </div>
+            <div>
+              {item.percent && (
+                <Badge variant='outline'>
+                  <p className='text-green-600'>{item.percent}</p>
+                </Badge>
+              )}
+            </div>
           </div>
         ))}
       </div>
