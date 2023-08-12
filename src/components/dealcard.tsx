@@ -83,7 +83,7 @@ export default function DealCard() {
               <p className='text-sm'>Senior APY</p>
               <p className='mt-1 text-2xl'>{deal.seniorapy}</p>
             </div>
-            <div className=' text-left'>
+            <div className=' text-left uppercase'>
               <p className='text-xs '>Junior APY</p>
               <p className='mt-1 text-3xl '>{deal.juniorapy}</p>
             </div>

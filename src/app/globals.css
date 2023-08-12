@@ -38,12 +38,12 @@
 }
 
 body {
-  border: 16px solid rgba(0, 255, 238, 0.3);
+  border: 20px solid rgba(0, 255, 238, 0.3);
+  min-height: 100vh;
   background-size: 160px 160px;
   background-image: linear-gradient(to right, #f8f0fd 8px, transparent 1px),
     linear-gradient(to bottom, #f8f0fd 8px, transparent 1px);
   @apply text-slate-700;
-  height: 100vh;
 }
 
 h1,
