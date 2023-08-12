@@ -26,7 +26,7 @@ export default function MyDeal() {
   return (
     <ul
       role='list'
-      className='mx-auto grid max-w-2xl grid-cols-1 gap-6 sm:grid-cols-3 lg:mx-0 lg:max-w-none lg:gap-8 text-center grid-flow-row-dense'
+      className='mx-auto grid max-w-2xl grid-cols-1 gap-6  sm:grid-cols-2 lg:grid-cols-3 lg:mx-0 lg:max-w-none lg:gap-8 text-center grid-flow-row-dense'
     >
       {deals.map((deal) => (
         <Link
