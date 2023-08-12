@@ -8,14 +8,20 @@ import Status from '@/components/status';
 import { BaseFiFundManager } from '@/contracts/BaseFiFundManager';
 import { BASEFI_FUND_MANAGER } from '@/contracts/addresses';
 import {
-  Fund,
+  FundDeployed,
   FundsDeployed,
   deals,
   parseBytes32,
   parseFund,
 } from '@/service/fund';
 
-export default function DealCard({ fund, i }: { fund: Fund; i: number }) {
+export default function DealCard({
+  fund,
+  i,
+}: {
+  fund: FundDeployed;
+  i: number;
+}) {
   const { data: fundData } = useContractRead({
     address: BASEFI_FUND_MANAGER,
     abi: BaseFiFundManager,

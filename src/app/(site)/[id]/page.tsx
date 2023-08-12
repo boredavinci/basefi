@@ -1,25 +1,50 @@
+'use client';
+
+import { useState, useEffect } from 'react';
+
 import Image from 'next/image';
+import { useContractRead } from 'wagmi';
 
 import { Activity } from '@/components/activity';
 import InvestNow from '@/components/invest-section';
 import ProductStats from '@/components/product-stats';
 import Status from '@/components/status';
 import { Transactions } from '@/components/transactions';
+import { BaseFiFundManager } from '@/contracts/BaseFiFundManager';
+import { BASEFI_FUND_MANAGER } from '@/contracts/addresses';
+import { deals, parseBytes32, parseFund } from '@/service/fund';
 
-export default function Page({ params }: { params: { id: string } }) {
+export default function Page({ params: { id } }: { params: { id: string } }) {
+  const [isClient, setIsClient] = useState(false);
+  const { data: fundData } = useContractRead({
+    address: BASEFI_FUND_MANAGER,
+    abi: BaseFiFundManager,
+    functionName: 'fundMap',
+    args: [parseBytes32(id)],
+    select: parseFund,
+  });
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  if (!isClient) {
+    return null;
+  }
+
   return (
     <>
       <div className='flex justify-between items-center'>
         <h1 className='inline-flex text-4xl lg:text-5xl mt-1 relative'>
           Water lily
         </h1>
-        <Status />
+        <Status stage={fundData?.stage} />
       </div>
       <div className='flex flex-col md:flex-row '>
         <div className='flex flex-col md:w-1/2 mr-6'>
           <Image
             className='mx-auto w-full rounded-3xl mb-16'
-            src={`/${params.id}.jpg`}
+            src={deals.get(id)?.logoUrl || ''}
             width={500}
             height={500}
             alt=''
@@ -35,7 +60,7 @@ export default function Page({ params }: { params: { id: string } }) {
         </div>
 
         <div className='flex flex-col w-full md:w-1/2 gap-y-6'>
-          <InvestNow />
+          <InvestNow fund={fundData!} />
           <p className='text-lg uppercase '> Latest repayments</p>
           <div className='card2'>
             <Activity />

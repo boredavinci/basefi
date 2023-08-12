@@ -90,7 +90,7 @@ export const getAllFundsDeployed = async (publicClient: PublicClient) => {
 
 export type FundsDeployed = Awaited<ReturnType<typeof getAllFundsDeployed>>;
 
-export type Fund = ArrayElement<FundsDeployed>;
+export type FundDeployed = ArrayElement<FundsDeployed>;
 
 export type ArrayElement<T> = T extends (infer U)[] ? U : T;
 
@@ -153,7 +153,7 @@ export const parseFund = ([
   bigint
 ]) => ({
   name,
-  symbol,
+  symbol: formatBytes32(symbol),
   admin,
   seniorToken,
   juniorToken,
@@ -166,3 +166,5 @@ export const parseFund = ([
   stage: stage as FundStage,
   closeFundingTimestamp: new Date(Number(closeFundingTimestamp)),
 });
+
+export type Fund = Awaited<ReturnType<typeof parseFund>>;
