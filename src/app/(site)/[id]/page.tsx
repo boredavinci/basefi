@@ -3,12 +3,18 @@ import Image from 'next/image';
 import { Activity } from '@/components/activity';
 import InvestNow from '@/components/invest-section';
 import ProductStats from '@/components/product-stats';
+import Status from '@/components/status';
 import { Transactions } from '@/components/transactions';
 
 export default function Page({ params }: { params: { id: string } }) {
   return (
     <>
-      <h1 className=' text-4xl lg:text-5xl mt-12'>Water lily</h1>
+      <div className='flex justify-between items-center'>
+        <h1 className='inline-flex text-4xl lg:text-5xl mt-1 relative'>
+          Water lily
+        </h1>
+        <Status />
+      </div>
       <div className='flex flex-col md:flex-row '>
         <div className='flex flex-col md:w-1/2 mr-6'>
           <Image
