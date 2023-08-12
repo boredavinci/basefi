@@ -30,15 +30,19 @@
 }
 
 .card2 {
-  @apply rounded-3xl bg-white/50 shadow-2xl shadow-lime-300;
+  @apply rounded-3xl bg-white/75 shadow-2xl shadow-lime-300;
+}
+
+.card3 {
+  @apply rounded-3xl bg-white/75 shadow-2xl shadow-fuchsia-300;
 }
 
 body {
-  border: 18px solid rgba(0, 255, 238, 0.3);
+  border: 16px solid rgba(0, 255, 238, 0.3);
   background-size: 160px 160px;
   background-image: linear-gradient(to right, #f8f0fd 8px, transparent 1px),
     linear-gradient(to bottom, #f8f0fd 8px, transparent 1px);
-  @apply text-slate-800;
+  @apply text-slate-700;
   height: 100vh;
 }
 
@@ -47,10 +51,11 @@ h2,
 h3,
 h4,
 h5,
-h6 {
+h6,
+p {
   @apply font-semibold;
 }
 
-dl {
-  @apply rounded-3xl;
+table {
+  @apply font-medium;
 }
