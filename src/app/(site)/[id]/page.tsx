@@ -5,7 +5,7 @@ import InvestNow from '@/components/invest-section';
 import ProductStats from '@/components/product-stats';
 import { Transactions } from '@/components/transactions';
 
-export default function Page({ params }: { params: { name: string } }) {
+export default function Page({ params }: { params: { id: string } }) {
   return (
     <>
       <h1 className=' text-4xl lg:text-5xl mt-12'>{params.id}</h1>
