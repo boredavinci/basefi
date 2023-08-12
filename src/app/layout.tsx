@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     template: `%s | ${siteConfig.name}`,
   },
   description: siteConfig.description,
-  keywords: ['Fund management software', 'asset tokenization'],
+  keywords: siteConfig.keywords,
 };
 
 export default function RootLayout({
