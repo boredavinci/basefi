@@ -3,58 +3,58 @@ import Link from 'next/link';
 
 const deals = [
   {
-    name: ' Birth of venus',
-    artist: 'Botticelli',
+    name: ' Water Lily Pond',
+    artist: 'Claude Monet',
     tvl: '32,000,000',
     juniorapy: '28%',
     seniorapy: '5%',
-    logoUrl: 'https://fakeimg.pl/800x800/0052FF/fff?text=art&font=museo',
-    url: 'innovation-fund ',
+    logoUrl: '/water-lily-pond-harmony-in-green.jpg',
+    url: 'water-lily-pond-harmony-in-green',
   },
   {
-    name: ' Birth of venus',
-    artist: 'Botticelli',
+    name: 'The Ballet Class',
+    artist: 'Edgar Degas',
     tvl: '32,000,000',
     juniorapy: '28%',
     seniorapy: '5%',
-    logoUrl: 'https://fakeimg.pl/800x800/0052FF/fff?text=art&font=museo',
-    url: 'innovation-fund ',
+    logoUrl: '/the-ballet-class.jpg',
+    url: 'the-ballet-class',
   },
   {
-    name: ' Birth of venus',
-    artist: 'Botticelli',
+    name: 'Bal du moulin de la Galette',
+    artist: 'Pierre Renoir',
     tvl: '32,000,000',
     juniorapy: '28%',
     seniorapy: '5%',
-    logoUrl: 'https://fakeimg.pl/800x800/0052FF/fff?text=art&font=museo',
-    url: 'innovation-fund ',
+    logoUrl: '/bal-du-moulin.jpg',
+    url: 'bal-du-moulin',
   },
   {
-    name: ' Birth of venus',
-    artist: 'Botticelli',
+    name: 'La Nuit étoilée',
+    artist: 'Vincent Van Gogh',
     tvl: '32,000,000',
     juniorapy: '28%',
     seniorapy: '5%',
-    logoUrl: 'https://fakeimg.pl/800x800/0052FF/fff?text=art&font=museo',
-    url: 'innovation-fund ',
+    logoUrl: '/la-nuit-etoilee.jpg',
+    url: 'la-nuit-etoilee',
   },
   {
-    name: ' Birth of venus',
-    artist: 'Botticelli',
+    name: 'House in provence',
+    artist: 'Paul Cézanne',
     tvl: '32,000,000',
     juniorapy: '28%',
     seniorapy: '5%',
-    logoUrl: 'https://fakeimg.pl/800x800/0052FF/fff?text=art&font=museo',
-    url: 'innovation-fund ',
+    logoUrl: '/houses-in-provence.jpg',
+    url: 'houses-in-provence',
   },
   {
-    name: ' Birth of venus',
-    artist: 'Botticelli',
+    name: 'Woman with parasol',
+    artist: 'Claude Monet',
     tvl: '32,000,000',
     juniorapy: '28%',
     seniorapy: '5%',
-    logoUrl: 'https://fakeimg.pl/800x800/0052FF/fff?text=art&font=museo',
-    url: 'innovation-fund ',
+    logoUrl: '/woman-with-parasol.jpg',
+    url: 'woman-with-parasol',
   },
 ];
 
@@ -67,17 +67,18 @@ export default function DealCard() {
       {deals.map((deal) => (
         <Link
           key={deal.name}
-          className='rounded-3xl px-6 py-8 shadow-2xl  shadow-fuchsia-200  card'
+          className='rounded-3xl px-6 py-8 shadow-2xl  shadow-fuchsia-200 h-fit card'
           href={deal.url}
         >
           <Image
-            className='mx-auto w-full rounded-3xl'
+            className='mx-auto w-full rounded-3xl 24'
             src={deal.logoUrl}
-            width={300}
-            height={300}
-            alt=''
+            width={400}
+            height={400}
+            alt={deal.name}
           />
           <h2 className='mt-6 text-2xl'>{deal.name}</h2>
+          <p className='mt-4 text-xl'>{deal.artist}</p>
           <div className='flex  mt-6 pt-4 justify-between'>
             <div className='text-left uppercase'>
               <p className='text-sm'>Senior APY</p>

@@ -5,17 +5,17 @@ import InvestNow from '@/components/invest-section';
 import ProductStats from '@/components/product-stats';
 import { Transactions } from '@/components/transactions';
 
-export default function Page() {
+export default function Page({ params }: { params: { name: string } }) {
   return (
     <>
-      <h1 className=' text-4xl lg:text-5xl mt-12'>Art name</h1>
+      <h1 className=' text-4xl lg:text-5xl mt-12'>{params.id}</h1>
       <div className='flex flex-col md:flex-row '>
         <div className='flex flex-col md:w-1/2 mr-6'>
           <Image
             className='mx-auto w-full rounded-3xl mb-16'
-            src='https://fakeimg.pl/800x800/0052FF/fff?text=art&font=museo'
-            width={300}
-            height={300}
+            src={`/${params.id}.jpg`}
+            width={500}
+            height={500}
             alt=''
           />
           <ProductStats />
