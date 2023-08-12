@@ -48,13 +48,13 @@ const deals = [
     url: 'houses-in-provence',
   },
   {
-    name: 'Woman with parasol',
+    name: 'Irises in Monet’s garden',
     artist: 'Claude Monet',
     tvl: '32,000,000',
     juniorapy: '28%',
     seniorapy: '5%',
-    logoUrl: '/woman-with-parasol.jpg',
-    url: 'woman-with-parasol',
+    logoUrl: '/irises.jpg',
+    url: 'irises',
   },
 ];
 
@@ -62,7 +62,7 @@ export default function DealCard() {
   return (
     <ul
       role='list'
-      className='mx-auto mt-12 grid max-w-2xl grid-cols-1 gap-6 sm:grid-cols-2 lg:mx-0 lg:max-w-none lg:gap-8 text-center'
+      className='mx-auto mt-12 grid max-w-2xl grid-cols-1 gap-6 sm:grid-cols-2 lg:mx-0 lg:max-w-none lg:gap-8 text-center grid-flow-row-dense'
     >
       {deals.map((deal) => (
         <Link
@@ -71,7 +71,7 @@ export default function DealCard() {
           href={deal.url}
         >
           <Image
-            className='mx-auto w-full rounded-3xl 24'
+            className='mx-auto w-full rounded-3xl 24 h-80 object-cover'
             src={deal.logoUrl}
             width={400}
             height={400}
