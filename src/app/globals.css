@@ -59,3 +59,7 @@ p {
 table {
   @apply font-medium;
 }
+
+*:focus {
+  outline: none;
+}
