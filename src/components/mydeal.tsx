@@ -1,6 +1,8 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
+import Status from '@/components/status';
+
 const deals = [
   {
     name: ' Water Lily Pond',
@@ -31,9 +33,13 @@ export default function MyDeal() {
       {deals.map((deal) => (
         <Link
           key={deal.name}
-          className='rounded-3xl px-6 py-8 shadow-2xl  shadow-fuchsia-200 h-fit card'
+          className='rounded-3xl px-6 py-8 shadow-2xl  shadow-fuchsia-200 h-fit card relative'
           href={deal.url}
         >
+          <div className='absolute shadow-2xl top-10 right-6'>
+            <Status />
+          </div>
+
           <Image
             className='mx-auto w-full rounded-3xl 24 h-60 object-cover'
             src={deal.logoUrl}
