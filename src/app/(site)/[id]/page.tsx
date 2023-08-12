@@ -38,7 +38,7 @@ export default function Page({ params: { id } }: { params: { id: string } }) {
         <h1 className='inline-flex text-4xl lg:text-5xl mt-1 relative'>
           Water lily
         </h1>
-        <Status stage={fundData?.stage} />
+        {fundData?.stage && <Status stage={fundData?.stage} />}
       </div>
       <div className='flex flex-col md:flex-row '>
         <div className='flex flex-col md:w-1/2 mr-6'>
