@@ -28,7 +28,7 @@ const { chains, publicClient, webSocketPublicClient } = configureChains(
 );
 
 // TODO: Replace with your own project ID
-const projectId = 'YOUR_PROJECT_ID';
+const projectId = '588bce7509f04c5b9cd6514fd566fd16';
 
 const { wallets } = getDefaultWallets({
   appName: 'BaseFI',
