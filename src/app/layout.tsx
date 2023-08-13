@@ -9,10 +9,16 @@ import { cn } from '@/lib/utils';
 import './globals.css';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
+
 const playfair = Playfair_Display({
   subsets: ['latin'],
   variable: '--font-playfair',
 });
+
+// const bodoni = Bodoni_Moda({
+//   subsets: ['latin'],
+//   variable: '--font-Bodoni_Moda',
+// });
 
 export const metadata: Metadata = {
   title: {
@@ -33,6 +39,7 @@ export default function RootLayout({
       <body
         className={cn(
           'min-h-screen bg-background font-sans antialiased',
+          playfair.className,
           inter.className
         )}
       >

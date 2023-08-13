@@ -82,7 +82,7 @@ export default function DealCard() {
             height={400}
             alt={deal.name}
           />
-          <h2 className='mt-6 text-2xl'>{deal.name}</h2>
+          <h2 className='mt-6 text-3xl'>{deal.name}</h2>
           <p className='mt-4 text-xl'>{deal.artist}</p>
           <div className='flex  mt-6 pt-4 justify-between'>
             <div className='text-left uppercase'>

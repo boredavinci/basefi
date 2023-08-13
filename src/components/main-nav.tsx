@@ -34,7 +34,7 @@ export function MainNav({ items, children }: MainNavProps) {
               key={index}
               href={item.disabled ? '#' : item.href}
               className={cn(
-                'flex items-center text-xl font-bold transition-colors hover:text-foreground/80 ',
+                'flex items-center text-xl font-semibold transition-colors hover:text-foreground/80 ',
                 item.href.startsWith(`/${segment}`)
                   ? 'text-foreground'
                   : 'text-foreground/60',

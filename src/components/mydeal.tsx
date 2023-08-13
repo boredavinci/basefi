@@ -50,7 +50,7 @@ export default function MyDeal() {
           <h2 className='mt-6 text-2xl'>{deal.name}</h2>
           <div className='flex pt-4 justify-between'>
             <div className='text-left uppercase'>
-              <p className='text-sm'>Invested</p>
+              <p className='text-xs'>Invested</p>
               <p className='mt-1 text-2xl'>{deal.seniorapy}</p>
             </div>
             <div className=' text-left uppercase'>

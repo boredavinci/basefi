@@ -51,11 +51,11 @@ h2,
 h3,
 h4,
 h5,
-h6,
-p {
-  @apply font-semibold;
+h6 {
+  @apply font-playfair font-normal  italic;
 }
 
+p,
 table {
   @apply font-medium;
 }
