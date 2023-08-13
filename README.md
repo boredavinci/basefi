@@ -30,9 +30,12 @@ pnpm dev
 
 This will start a local server, and you can access the application in your web browser at `http://localhost:port`, where `port` is the port number on which the server is running.
 
-### Contributing
+### Smart Contracts
 
-Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
+The main 2 contracts used in the project are deployed on:
+
+- [BaseFi Fund Manager](https://goerli.basescan.org/address/0xad2b38f4f3237d6005b1cda5ecf50dd53973fdf5)
+- [BaseFi USD](https://goerli.basescan.org/address/0x964b3DAA93084c73df5EC1ca280fe63b7f343364)
 
 ### License
 
@@ -44,6 +47,6 @@ If you encounter any problems or have any questions, please open an issue on Git
 
 ### Acknowledgments
 
-* The BaseFi community and all contributors who make this project possible.
+- The BaseFi community and all contributors who make this project possible.
 
 Happy coding!
