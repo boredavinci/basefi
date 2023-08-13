@@ -25,6 +25,8 @@
     "@radix-ui/react-avatar": "^1.0.3",
     "@radix-ui/react-slot": "^1.0.2",
     "@rainbow-me/rainbowkit": "^1.0.6",
+    "@splinetool/react-spline": "^2.2.6",
+    "@splinetool/runtime": "^0.9.418",
     "@tanstack/react-table": "^8.9.3",
     "@types/node": "20.4.2",
     "@types/react": "18.2.14",
