@@ -17,12 +17,12 @@ import {
   TableRow,
 } from '@/components/ui/table';
 
-import { getFundInvestments } from '@/service/fund';
+import { FundInvestments, getFundInvestments } from '@/service/fund';
 
 export function Activity({ symbol }: { symbol: `0x${string}` }) {
   const client = usePublicClient();
   const { address } = useAccount();
-  const [fundInvestments, setFundInvestments] = useState<getFundInvestments>();
+  const [fundInvestments, setFundInvestments] = useState<FundInvestments>();
   useWatchPendingTransactions({
     listener: () => update(client),
   });

@@ -1,19 +1,14 @@
-'use client';
-
-import { useState, useEffect, useCallback } from 'react';
-
-import { formatEther, parseEther } from 'viem';
-import { usePublicClient, useAccount, PublicClient } from 'wagmi';
+import { formatEther } from 'viem';
 
 import { Badge } from '@/components/ui/badge';
 
-import { getFundInvestments } from '@/service/fund';
+import { FundInvestments } from '@/service/fund';
 
-export default function DashStats() {
-  const client = usePublicClient();
-  const { address: user } = useAccount();
-  const [fundInvestments, setFundInvestments] = useState<getFundInvestments>();
-
+export default function DashStats({
+  fundInvestments,
+}: {
+  fundInvestments?: FundInvestments;
+}) {
   const stats = [
     {
       name: 'Total invested',
@@ -26,16 +21,6 @@ export default function DashStats() {
     { name: 'Portfolio value', stat: '21,129', percent: '+10%' },
     { name: 'Total investments', stat: fundInvestments?.length },
   ];
-
-  const update = useCallback(
-    async (client: PublicClient) =>
-      setFundInvestments(await getFundInvestments(client, { user })),
-    [user]
-  );
-
-  useEffect(() => {
-    update(client);
-  }, [client, update]);
 
   return (
     <div>

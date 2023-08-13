@@ -1,14 +1,4 @@
-'use client';
-
-import { useCallback, useEffect, useState } from 'react';
-
 import { formatEther } from 'viem';
-import {
-  PublicClient,
-  useAccount,
-  usePublicClient,
-  useWatchPendingTransactions,
-} from 'wagmi';
 
 import {
   Table,
@@ -19,30 +9,13 @@ import {
   TableRow,
 } from '@/components/ui/table';
 
-import {
-  formatBytes32,
-  getFundInvestments,
-  parseBytes32,
-} from '@/service/fund';
+import { FundInvestments, formatBytes32 } from '@/service/fund';
 
-export function MyTransactions() {
-  const client = usePublicClient();
-  const { address: user } = useAccount();
-  const [fundInvestments, setFundInvestments] = useState<getFundInvestments>();
-  useWatchPendingTransactions({
-    listener: () => update(client),
-  });
-
-  const update = useCallback(
-    async (client: PublicClient) =>
-      setFundInvestments(await getFundInvestments(client, { user })),
-    [user]
-  );
-
-  useEffect(() => {
-    update(client);
-  }, [client, update]);
-
+export function MyTransactions({
+  fundInvestments,
+}: {
+  fundInvestments?: FundInvestments;
+}) {
   return (
     <Table>
       <TableHeader>

@@ -146,7 +146,7 @@ export const getFundInvestments = async (
   return res;
 };
 
-export type getFundInvestments = Awaited<ReturnType<typeof getFundInvestments>>;
+export type FundInvestments = Awaited<ReturnType<typeof getFundInvestments>>;
 
 export const getAllFundsDeployed = async (publicClient: PublicClient) => {
   const contract = getContract({
