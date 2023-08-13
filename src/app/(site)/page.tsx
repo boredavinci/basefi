@@ -1,3 +1,6 @@
+'use client';
+
+import Spline from '@splinetool/react-spline';
 import Script from 'next/script';
 
 import { siteConfig } from '@/config/site';
@@ -13,7 +16,7 @@ export default function Home() {
           type='module'
           src='https://unpkg.com/@splinetool/viewer@0.9.418/build/spline-viewer.js'
         ></Script>
-        {/* <spline-viewer url='https://prod.spline.design/fXZdpdmlsl9yV-0v/scene.splinecode'></spline-viewer> */}
+        <Spline scene='https://prod.spline.design/fXZdpdmlsl9yV-0v/scene.splinecode' />
       </div>
     </main>
   );
