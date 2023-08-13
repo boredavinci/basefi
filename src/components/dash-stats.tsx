@@ -2,23 +2,40 @@ import { formatEther } from 'viem';
 
 import { Badge } from '@/components/ui/badge';
 
-import { FundInvestments } from '@/service/fund';
+import {
+  FundInvestments,
+  FundsDeployed,
+  calculateReturns,
+} from '@/service/fund';
 
 export default function DashStats({
   fundInvestments,
+  fundsDeployed,
 }: {
   fundInvestments?: FundInvestments;
+  fundsDeployed?: FundsDeployed;
 }) {
+  const totalInvested =
+    fundInvestments?.reduce((acc, x) => acc + x.amount!, 0n) || 0n;
+  const portfolio =
+    fundInvestments
+      ?.map((fund) => calculateReturns(fund, fundsDeployed))
+      .reduce((acc, x) => acc! + x!, 0n) || 0n;
+
   const stats = [
     {
       name: 'Total invested',
-      stat: Number(
-        formatEther(
-          fundInvestments?.reduce((acc, x) => acc + x.amount!, 0n) || 0n
-        )
-      ).toFixed(2),
+      stat: fundInvestments && Number(formatEther(totalInvested)).toFixed(2),
     },
-    { name: 'Portfolio value', stat: '21,129', percent: '+10%' },
+    {
+      name: 'Portfolio value',
+      stat: Number(formatEther(portfolio || 0n)).toFixed(2),
+      percent: `+%${(
+        (Number(formatEther(portfolio)) / Number(formatEther(totalInvested)) -
+          1) *
+        100
+      ).toFixed(2)}`,
+    },
     { name: 'Total investments', stat: fundInvestments?.length },
   ];
 

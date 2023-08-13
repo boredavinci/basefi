@@ -2,7 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import Status from '@/components/status';
-import { FundInvestments, FundStage } from '@/service/fund';
+import { FundInvestments, FundStage, FundsDeployed } from '@/service/fund';
 
 const deals = [
   {
@@ -29,6 +29,7 @@ export default function MyDeal({
   fundInvestments,
 }: {
   fundInvestments?: FundInvestments;
+  fundsDeployed?: FundsDeployed;
 }) {
   return (
     <ul
