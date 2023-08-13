@@ -21,10 +21,9 @@ export default function Deals() {
         role='list'
         className='mx-auto mt-12 grid max-w-2xl grid-cols-1 gap-6 sm:grid-cols-2 lg:mx-0 lg:max-w-none lg:gap-8 text-center grid-flow-row-dense'
       >
-        {funds &&
-          funds.map((fund, i) => (
-            <DealCard key={fund.symbol} fund={fund} i={i} />
-          ))}
+        {funds?.map((fund, i) => (
+          <DealCard key={fund.symbol} fund={fund} />
+        ))}
       </ul>
     </div>
   );

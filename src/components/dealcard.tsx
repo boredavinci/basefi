@@ -7,21 +7,9 @@ import { useContractRead } from 'wagmi';
 import Status from '@/components/status';
 import { BaseFiFundManager } from '@/contracts/BaseFiFundManager';
 import { BASEFI_FUND_MANAGER } from '@/contracts/addresses';
-import {
-  FundDeployed,
-  FundsDeployed,
-  deals,
-  parseBytes32,
-  parseFund,
-} from '@/service/fund';
+import { FundDeployed, deals, parseBytes32, parseFund } from '@/service/fund';
 
-export default function DealCard({
-  fund,
-  i,
-}: {
-  fund: FundDeployed;
-  i: number;
-}) {
+export default function DealCard({ fund }: { fund: FundDeployed }) {
   const { data: fundData } = useContractRead({
     address: BASEFI_FUND_MANAGER,
     abi: BaseFiFundManager,
