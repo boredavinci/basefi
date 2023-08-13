@@ -1,12 +1,42 @@
+'use client';
+
+import { useState, useEffect, useCallback } from 'react';
+
+import { formatEther, parseEther } from 'viem';
+import { usePublicClient, useAccount, PublicClient } from 'wagmi';
+
 import { Badge } from '@/components/ui/badge';
 
-const stats = [
-  { name: 'Total invested', stat: '19,000' },
-  { name: 'Portfolio value', stat: '21,129', percent: '+10%' },
-  { name: 'Total investments', stat: '2' },
-];
+import { getFundInvestments } from '@/service/fund';
 
 export default function DashStats() {
+  const client = usePublicClient();
+  const { address: user } = useAccount();
+  const [fundInvestments, setFundInvestments] = useState<getFundInvestments>();
+
+  const stats = [
+    {
+      name: 'Total invested',
+      stat: Number(
+        formatEther(
+          fundInvestments?.reduce((acc, x) => acc + x.amount!, 0n) || 0n
+        )
+      ).toFixed(2),
+    },
+    { name: 'Portfolio value', stat: '21,129', percent: '+10%' },
+    { name: 'Total investments', stat: fundInvestments?.length },
+  ];
+
+  const update = useCallback(
+    async (client: PublicClient) =>
+      setFundInvestments(await getFundInvestments(client, { user })),
+    [user]
+  );
+
+  useEffect(() => {
+    update(client);
+  }, [client, update]);
+
   return (
     <div>
       <div className='grid grid-cols-1 gap-5 sm:grid-cols-3'>
@@ -17,7 +47,7 @@ export default function DashStats() {
           >
             <div>
               <p className='text-xs'>{item.name}</p>
-              <p className='mt-1 text-3xl'>{item.stat}</p>
+              <p className='mt-1 text-3xl'>{item.stat?.toString()}</p>
             </div>
             <div>
               {item.percent && (
