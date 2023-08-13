@@ -35,7 +35,7 @@ export default function Page({ params: { id } }: { params: { id: string } }) {
   return (
     <>
       <div className='flex justify-between items-center'>
-        <h1 className='inline-flex text-4xl lg:text-5xl mt-1 relative'>
+        <h1 className='inline-flex text-5xl lg:text-6xl mt-12 relative '>
           Water lily
         </h1>
         {fundData?.stage != undefined && <Status stage={fundData.stage} />}
@@ -50,7 +50,7 @@ export default function Page({ params: { id } }: { params: { id: string } }) {
             alt=''
           />
           <ProductStats totalValue={fundData?.totalvalue!} />
-          <p className='text-md mb-6 font-medium'>
+          <p className='text-md mb-6'>
             Water Lilies is a series of approximately 250 oil paintings by
             French Impressionist Claude Monet (1840–1926). The paintings depict
             his flower garden at his home in Giverny, and were the main focus of

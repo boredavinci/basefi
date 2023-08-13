@@ -30,7 +30,7 @@ export default async function MarketingLayout({
           </nav>
         </div>
       </header>
-      <main className=' flex flex-col container  max-w-[64rem] mb-24 gap-6'>
+      <main className=' flex flex-col container  max-w-[75rem] mb-24 gap-6'>
         {children}
       </main>
       <SiteFooter />

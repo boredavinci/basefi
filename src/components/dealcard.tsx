@@ -48,7 +48,7 @@ export default function DealCard({
         height={400}
         alt={(fund.symbol && deals.get(fund.symbol)?.name) || ''}
       />
-      <h2 className='mt-6 text-2xl'>{fund.name}</h2>
+      <h2 className='mt-6 text-3xl'>{fund.name}</h2>
       <p className='mt-4 text-xl'>
         {fund.symbol && deals.get(fund.symbol)?.artist}
       </p>
