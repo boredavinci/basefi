@@ -17,53 +17,67 @@ export const deals = new Map([
       url: 'water-lily-pond-harmony-in-green',
     },
   ],
+  [
+    'BC',
+    {
+      name: 'The Ballet Class',
+      artist: 'Edgar Degas',
+      tvl: '32,000,000',
+      juniorapy: '+16%',
+      seniorapy: '4.8%',
+      logoUrl: '/the-ballet-class.jpg',
+      url: 'the-ballet-class',
+    },
+  ],
+  [
+    'BDM',
+    {
+      name: 'Bal du moulin',
+      artist: 'Pierre Renoir',
+      tvl: '32,000,000',
+      juniorapy: '+16%',
+      seniorapy: '4.8%',
+      logoUrl: '/bal-du-moulin.jpg',
+      url: 'bal-du-moulin',
+    },
+  ],
+  [
+    'NE',
+    {
+      name: 'La Nuit étoilée',
+      artist: 'Vincent Van Gogh',
+      tvl: '32,000,000',
+      juniorapy: '+16%',
+      seniorapy: '4.8%',
+      logoUrl: '/la-nuit-etoilee.jpg',
+      url: 'la-nuit-etoilee',
+    },
+  ],
+  [
+    'HP',
+    {
+      name: 'House in provence',
+      artist: 'Paul Cézanne',
+      tvl: '32,000,000',
+      juniorapy: '+16%',
+      seniorapy: '4.8%',
+      logoUrl: '/houses-in-provence.jpg',
+      url: 'houses-in-provence',
+    },
+  ],
+  [
+    'IMG',
+    {
+      name: 'Irises in Monet’s garden',
+      artist: 'Claude Monet',
+      tvl: '32,000,000',
+      juniorapy: '+16%',
+      seniorapy: '4.8%',
+      logoUrl: '/irises.jpg',
+      url: 'irises',
+    },
+  ],
 ]);
-//   {
-//     name: 'The Ballet Class',
-//     artist: 'Edgar Degas',
-//     tvl: '32,000,000',
-//     juniorapy: '+16%',
-//     seniorapy: '4.8%',
-//     logoUrl: '/the-ballet-class.jpg',
-//     url: 'the-ballet-class',
-//   },
-//   {
-//     name: 'Bal du moulin',
-//     artist: 'Pierre Renoir',
-//     tvl: '32,000,000',
-//     juniorapy: '+16%',
-//     seniorapy: '4.8%',
-//     logoUrl: '/bal-du-moulin.jpg',
-//     url: 'bal-du-moulin',
-//   },
-//   {
-//     name: 'La Nuit étoilée',
-//     artist: 'Vincent Van Gogh',
-//     tvl: '32,000,000',
-//     juniorapy: '+16%',
-//     seniorapy: '4.8%',
-//     logoUrl: '/la-nuit-etoilee.jpg',
-//     url: 'la-nuit-etoilee',
-//   },
-//   {
-//     name: 'House in provence',
-//     artist: 'Paul Cézanne',
-//     tvl: '32,000,000',
-//     juniorapy: '+16%',
-//     seniorapy: '4.8%',
-//     logoUrl: '/houses-in-provence.jpg',
-//     url: 'houses-in-provence',
-//   },
-//   {
-//     name: 'Irises in Monet’s garden',
-//     artist: 'Claude Monet',
-//     tvl: '32,000,000',
-//     juniorapy: '+16%',
-//     seniorapy: '4.8%',
-//     logoUrl: '/irises.jpg',
-//     url: 'irises',
-//   },
-// ];
 
 export const getMyFundInvestments = async (publicClient: PublicClient) => {
   const contract = getContract({
@@ -73,7 +87,7 @@ export const getMyFundInvestments = async (publicClient: PublicClient) => {
   });
   const filter = await contract.createEventFilter.Invested(
     {},
-    { fromBlock: 'earliest' }
+    { fromBlock: 8366155n, toBlock: 'latest' }
   );
   const res = await Promise.all(
     (
@@ -111,7 +125,7 @@ export const getFundInvestments = async (
   });
   const filter = await contract.createEventFilter.Invested(
     { symbol, user },
-    { fromBlock: 'earliest' }
+    { fromBlock: 8366155n, toBlock: 'latest' }
   );
   const res = await Promise.all(
     (
@@ -142,7 +156,7 @@ export const getAllFundsDeployed = async (publicClient: PublicClient) => {
   });
   const filter = await contract.createEventFilter.FundDeployed(
     {},
-    { fromBlock: 'earliest' }
+    { fromBlock: 8366155n, toBlock: 'latest' }
   );
   return (await publicClient.getFilterLogs({ filter })).map((log) => ({
     ...log.args,

@@ -125,7 +125,9 @@ export function Transactions({
           <TableRow key={transaction.hash} className='hover:bg-primary-50/75'>
             <TableCell>{transaction.user}</TableCell>
             <TableCell>{transaction.isSenior ? 'Senior' : 'Junior'}</TableCell>
-            <TableCell>${formatEther(transaction.amount!)}</TableCell>
+            <TableCell>
+              ${transaction.amount ? formatEther(transaction.amount) : null}
+            </TableCell>
             <TableCell className='text-right'>
               {transaction.timestamp.toDateString()}
             </TableCell>

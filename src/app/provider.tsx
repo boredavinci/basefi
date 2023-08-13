@@ -15,6 +15,7 @@ import {
 } from '@rainbow-me/rainbowkit/wallets';
 import { configureChains, createConfig, WagmiConfig } from 'wagmi';
 import { mainnet, zora, goerli, baseGoerli, hardhat } from 'wagmi/chains';
+import { jsonRpcProvider } from 'wagmi/providers/jsonRpc';
 import { publicProvider } from 'wagmi/providers/public';
 
 const { chains, publicClient, webSocketPublicClient } = configureChains(
@@ -25,7 +26,14 @@ const { chains, publicClient, webSocketPublicClient } = configureChains(
     hardhat,
     ...(process.env.NEXT_PUBLIC_ENABLE_TESTNETS === 'true' ? [goerli] : []),
   ],
-  [publicProvider()]
+  [
+    jsonRpcProvider({
+      rpc: (chain) => ({
+        http: `https://cool-frequent-road.base-goerli.discover.quiknode.pro/52487125aa0bec31bc84dccec4508ad45c05c5d2/`,
+      }),
+    }),
+    publicProvider(),
+  ]
 );
 
 // TODO: Replace with your own project ID

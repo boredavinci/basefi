@@ -67,7 +67,9 @@ export function Activity({ symbol }: { symbol: `0x${string}` }) {
                 <TableCell>
                   {investments.isSenior ? 'Senior' : 'Junior'}
                 </TableCell>
-                <TableCell>${formatEther(investments.amount!)}</TableCell>
+                <TableCell>
+                  ${investments.amount ? formatEther(investments.amount) : null}
+                </TableCell>
                 <TableCell className='text-right'>
                   {investments.timestamp.toDateString()}
                 </TableCell>

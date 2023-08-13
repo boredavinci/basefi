@@ -1,19 +1,24 @@
-const stats = [
-  {
-    name: ' Last sold date',
-    value: 'Sep 2018',
-  },
-  {
-    name: 'Artist name',
-    value: 'Claude Monet',
-  },
-  {
-    name: 'year painted',
-    value: '1897',
-  },
-];
-
-export default function ProductStats({ totalValue }: { totalValue: string }) {
+export default function ProductStats({
+  totalValue,
+  artistName,
+}: {
+  totalValue: string;
+  artistName: string;
+}) {
+  const stats = [
+    {
+      name: ' Last sold date',
+      value: 'Sep 2018',
+    },
+    {
+      name: 'Artist name',
+      value: artistName,
+    },
+    {
+      name: 'year painted',
+      value: '1897',
+    },
+  ];
   return (
     <div className='w-full grid grid-cols-1 sm:grid-cols-2 gap-12 mb-12 '>
       <div key='totalvalue' className='text-left uppercase'>

@@ -14,7 +14,7 @@ export default function DealCard({ fund }: { fund: FundDeployed }) {
     address: BASEFI_FUND_MANAGER,
     abi: BaseFiFundManager,
     functionName: 'fundMap',
-    args: [parseBytes32(fund.symbol!)],
+    args: [parseBytes32(fund.symbol || '')],
     select: parseFund,
   });
 

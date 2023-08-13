@@ -85,7 +85,8 @@ export default function InvestNow({ fund }: { fund: Fund }) {
               value={srAmount}
             ></input>
             <p className='text-xs ml-2'>
-              balance: {Number(formatEther(balance!)).toFixed(2)}
+              balance:{' '}
+              {balance ? Number(formatEther(balance)).toFixed(2) : null}
             </p>
           </div>
           <button
@@ -137,7 +138,8 @@ export default function InvestNow({ fund }: { fund: Fund }) {
               value={jrAmount}
             ></input>
             <p className='text-xs ml-2'>
-              balance: {Number(formatEther(balance!)).toFixed(2)}
+              balance:{' '}
+              {balance ? Number(formatEther(balance)).toFixed(2) : null}
             </p>
           </div>
           <button

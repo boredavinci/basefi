@@ -56,9 +56,13 @@ export function MyTransactions() {
       <TableBody>
         {fundInvestments?.map((transaction) => (
           <TableRow key={transaction.hash} className='hover:bg-primary-50/75'>
-            <TableCell>{formatBytes32(transaction.symbol!)}</TableCell>
+            <TableCell>
+              {transaction.symbol && formatBytes32(transaction.symbol)}
+            </TableCell>
             <TableCell>{transaction.isSenior ? 'Senior' : 'Junior'}</TableCell>
-            <TableCell>${formatEther(transaction.amount!)}</TableCell>
+            <TableCell>
+              ${transaction.amount ? formatEther(transaction.amount) : null}
+            </TableCell>
             <TableCell className='text-right'>
               {transaction.timestamp.toDateString()}
             </TableCell>
