@@ -148,6 +148,8 @@ export const getFundInvestments = async (
 
 export type FundInvestments = Awaited<ReturnType<typeof getFundInvestments>>;
 
+export type FundInvestment = ArrayElement<FundInvestments>;
+
 export const getAllFundsDeployed = async (publicClient: PublicClient) => {
   const contract = getContract({
     address: BASEFI_FUND_MANAGER,
@@ -162,6 +164,28 @@ export const getAllFundsDeployed = async (publicClient: PublicClient) => {
     ...log.args,
     symbol: log.args.symbol && formatBytes32(log.args.symbol),
   }));
+};
+
+export const getFundDeployed = (funds: FundsDeployed, symbol: string) => {
+  return funds.find((fund) => fund.symbol === symbol);
+};
+
+export const calculateReturns = (
+  fund: FundInvestment,
+  fundsDeployed?: FundsDeployed
+) => {
+  if (!fundsDeployed) return;
+  if (!fund.symbol) return;
+
+  const x = getFundDeployed(fundsDeployed, formatBytes32(fund.symbol));
+  if (!x?.srAPY || !x.jrAPY) {
+    return;
+  }
+  if (fund.isSenior) {
+    return (BigInt(x.srAPY! + 100) * fund.amount!) / 100n;
+  } else {
+    return (BigInt(x.jrAPY! + 100) * fund.amount!) / 100n;
+  }
 };
 
 export type FundsDeployed = Awaited<ReturnType<typeof getAllFundsDeployed>>;

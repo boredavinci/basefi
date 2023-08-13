@@ -12,12 +12,23 @@ import {
 import DashStats from '@/components/dash-stats';
 import { MyTransactions } from '@/components/my-transactions';
 import MyDeal from '@/components/mydeal';
-import { FundInvestments, getFundInvestments } from '@/service/fund';
+import {
+  FundInvestments,
+  FundsDeployed,
+  getAllFundsDeployed,
+  getFundInvestments,
+} from '@/service/fund';
 
 export default function Dashboard() {
   const client = usePublicClient();
   const { address: user } = useAccount();
   const [fundInvestments, setFundInvestments] = useState<FundInvestments>();
+  const [funds, setFunds] = useState<FundsDeployed>();
+
+  useEffect(() => {
+    (async () => setFunds(await getAllFundsDeployed(client)))();
+  }, [client]);
+
   useWatchPendingTransactions({
     listener: () => update(client),
   });
@@ -37,9 +48,9 @@ export default function Dashboard() {
       <h1 className='inline-flex text-5xl lg:text-6xl mt-12 relative '>
         Dashboard
       </h1>
-      <DashStats fundInvestments={fundInvestments} />
+      <DashStats fundInvestments={fundInvestments} fundsDeployed={funds} />
       <p className='text-lg uppercase'> My investments</p>
-      <MyDeal />
+      <MyDeal fundInvestments={fundInvestments} fundsDeployed={funds} />
       <p className='text-lg uppercase'> My Transactions</p>
       <div className='card2'>
         <MyTransactions fundInvestments={fundInvestments} />
