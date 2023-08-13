@@ -32,7 +32,7 @@ const { chains, publicClient, webSocketPublicClient } = configureChains(
         http: `https://cool-frequent-road.base-goerli.discover.quiknode.pro/52487125aa0bec31bc84dccec4508ad45c05c5d2/`,
       }),
     }),
-    publicProvider(),
+    // publicProvider(),
   ]
 );
 

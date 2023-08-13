@@ -125,7 +125,7 @@ export const getFundInvestments = async (
   });
   const filter = await contract.createEventFilter.Invested(
     { symbol, user },
-    { fromBlock: 8366155n, toBlock: 'latest' }
+    { fromBlock: 8366155n, toBlock: 8376155n }
   );
   const res = await Promise.all(
     (
@@ -158,7 +158,7 @@ export const getAllFundsDeployed = async (publicClient: PublicClient) => {
   });
   const filter = await contract.createEventFilter.FundDeployed(
     {},
-    { fromBlock: 8366155n, toBlock: 'latest' }
+    { fromBlock: 8366155n, toBlock: 8376155n }
   );
   return (await publicClient.getFilterLogs({ filter })).map((log) => ({
     ...log.args,
