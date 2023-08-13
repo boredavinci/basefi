@@ -1,5 +1,4 @@
 import Script from 'next/script';
-import SplineViewer from 'spline-viewer';
 
 import { siteConfig } from '@/config/site';
 
@@ -14,7 +13,7 @@ export default function Home() {
           type='module'
           src='https://unpkg.com/@splinetool/viewer@0.9.418/build/spline-viewer.js'
         ></Script>
-        <SplineViewer url='https://prod.spline.design/fXZdpdmlsl9yV-0v/scene.splinecode'></SplineViewer>
+        <spline-viewer url='https://prod.spline.design/fXZdpdmlsl9yV-0v/scene.splinecode'></spline-viewer>
       </div>
     </main>
   );
