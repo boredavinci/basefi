@@ -23,7 +23,7 @@ export function MainNav({ items, children }: MainNavProps) {
   return (
     <div className='flex gap-6 md:gap-10'>
       <Link href='/' className='hidden items-center space-x-2 md:flex'>
-        <span className='hidden text-3xl font-bold sm:inline-block'>
+        <span className='hidden text-3xl font-bold sm:inline-block  text-primary'>
           {siteConfig.name}
         </span>
       </Link>
@@ -51,7 +51,7 @@ export function MainNav({ items, children }: MainNavProps) {
         onClick={() => setShowMobileMenu(!showMobileMenu)}
       >
         {showMobileMenu ? <Icons.close /> : <Icons.menu />}
-        <span className='font-bold text-2xl'>BaseFI</span>
+        <span className='font-bold text-2xl text-primary'>BaseFI</span>
       </button>
       {showMobileMenu && items && (
         <MobileNav items={items}>{children}</MobileNav>
