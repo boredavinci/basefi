@@ -1,12 +1,5 @@
-import {
-  formatEther,
-  getContract,
-  hexToNumber,
-  hexToString,
-  parseEther,
-  stringToHex,
-} from 'viem';
-import { PublicClient, usePublicClient } from 'wagmi';
+import { formatEther, getContract, hexToString, stringToHex } from 'viem';
+import { PublicClient } from 'wagmi';
 
 import { BaseFiFundManager } from '@/contracts/BaseFiFundManager';
 import { BASEFI_FUND_MANAGER } from '@/contracts/addresses';
@@ -71,6 +64,75 @@ export const deals = new Map([
 //     url: 'irises',
 //   },
 // ];
+
+export const getMyFundInvestments = async (publicClient: PublicClient) => {
+  const contract = getContract({
+    address: BASEFI_FUND_MANAGER,
+    abi: BaseFiFundManager,
+    publicClient,
+  });
+  const filter = await contract.createEventFilter.Invested(
+    {},
+    { fromBlock: 'earliest' }
+  );
+  const res = await Promise.all(
+    (
+      await publicClient.getFilterLogs({ filter })
+    ).map(async (log) => {
+      const tx = await publicClient.getBlock({
+        blockHash: log.blockHash!,
+      });
+
+      return {
+        ...log.args,
+        timestamp: new Date(Number(tx.timestamp) * 1000),
+        hash: log.transactionHash,
+      };
+    })
+  );
+  res.reverse();
+  return res;
+};
+
+export const getFundInvestments = async (
+  publicClient: PublicClient,
+  {
+    symbol,
+    user,
+  }: {
+    symbol?: `0x${string}`;
+    user?: `0x${string}`;
+  }
+) => {
+  const contract = getContract({
+    address: BASEFI_FUND_MANAGER,
+    abi: BaseFiFundManager,
+    publicClient,
+  });
+  const filter = await contract.createEventFilter.Invested(
+    { symbol, user },
+    { fromBlock: 'earliest' }
+  );
+  const res = await Promise.all(
+    (
+      await publicClient.getFilterLogs({ filter })
+    ).map(async (log) => {
+      const tx = await publicClient.getBlock({
+        blockHash: log.blockHash!,
+      });
+
+      return {
+        ...log.args,
+        timestamp: new Date(Number(tx.timestamp) * 1000),
+        hash: log.transactionHash,
+      };
+    })
+  );
+  res.reverse();
+  return res;
+};
+
+export type getFundInvestments = Awaited<ReturnType<typeof getFundInvestments>>;
 
 export const getAllFundsDeployed = async (publicClient: PublicClient) => {
   const contract = getContract({

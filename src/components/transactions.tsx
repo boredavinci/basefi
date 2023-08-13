@@ -1,13 +1,24 @@
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+'use client';
+
+import { useCallback, useEffect, useState } from 'react';
+
+import { formatEther } from 'viem';
+import {
+  PublicClient,
+  usePublicClient,
+  useWatchPendingTransactions,
+} from 'wagmi';
+
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
   TableHead,
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
+
+import { getFundInvestments } from '@/service/fund';
 
 const transactions = [
   {
@@ -76,29 +87,48 @@ const transactions = [
   },
 ];
 
-export function Transactions() {
+export function Transactions({
+  symbol,
+  user,
+}: {
+  symbol?: `0x${string}`;
+  user?: `0x${string}`;
+}) {
+  const client = usePublicClient();
+  const [fundInvestments, setFundInvestments] = useState<getFundInvestments>();
+  useWatchPendingTransactions({
+    listener: () => update(client),
+  });
+
+  const update = useCallback(
+    async (client: PublicClient) =>
+      setFundInvestments(await getFundInvestments(client, { symbol, user })),
+    [symbol, user]
+  );
+
+  useEffect(() => {
+    update(client);
+  }, [client, update]);
+
   return (
     <Table>
       <TableHeader>
         <TableRow className='text-xs uppercase'>
           <TableHead className='w-[100px]'>Address</TableHead>
-          <TableHead>Action</TableHead>
+          <TableHead>Type</TableHead>
           <TableHead>Amount</TableHead>
-          <TableHead>Date</TableHead>
-          <TableHead className='text-right'>TX</TableHead>
+          <TableHead className='text-right'>Date</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
-        {transactions.map((transaction) => (
-          <TableRow
-            key={transaction.transactionUrl}
-            className='hover:bg-primary-50/75'
-          >
-            <TableCell>{transaction.address}</TableCell>
-            <TableCell>{transaction.status}</TableCell>
-            <TableCell>{transaction.date}</TableCell>
-            <TableCell>{transaction.amount}</TableCell>
-            <TableCell className='text-right'>TX</TableCell>
+        {fundInvestments?.map((transaction) => (
+          <TableRow key={transaction.hash} className='hover:bg-primary-50/75'>
+            <TableCell>{transaction.user}</TableCell>
+            <TableCell>{transaction.isSenior ? 'Senior' : 'Junior'}</TableCell>
+            <TableCell>${formatEther(transaction.amount!)}</TableCell>
+            <TableCell className='text-right'>
+              {transaction.timestamp.toDateString()}
+            </TableCell>
           </TableRow>
         ))}
       </TableBody>

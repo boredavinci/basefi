@@ -1,6 +1,6 @@
 import DashStats from '@/components/dash-stats';
+import { MyTransactions } from '@/components/my-transactions';
 import MyDeal from '@/components/mydeal';
-import { Transactions } from '@/components/transactions';
 
 export default function Dashboard() {
   return (
@@ -11,7 +11,7 @@ export default function Dashboard() {
       <MyDeal />
       <p className='text-lg uppercase'> My Transactions</p>
       <div className='card2'>
-        <Transactions />
+        <MyTransactions />
       </div>
     </>
   );

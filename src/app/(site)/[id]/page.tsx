@@ -38,7 +38,7 @@ export default function Page({ params: { id } }: { params: { id: string } }) {
         <h1 className='inline-flex text-4xl lg:text-5xl mt-1 relative'>
           Water lily
         </h1>
-        {fundData?.stage && <Status stage={fundData?.stage} />}
+        {fundData?.stage != undefined && <Status stage={fundData.stage} />}
       </div>
       <div className='flex flex-col md:flex-row '>
         <div className='flex flex-col md:w-1/2 mr-6'>
@@ -49,7 +49,7 @@ export default function Page({ params: { id } }: { params: { id: string } }) {
             height={500}
             alt=''
           />
-          <ProductStats />
+          <ProductStats totalValue={fundData?.totalvalue!} />
           <p className='text-md mb-6 font-medium'>
             Water Lilies is a series of approximately 250 oil paintings by
             French Impressionist Claude Monet (1840–1926). The paintings depict
@@ -61,15 +61,12 @@ export default function Page({ params: { id } }: { params: { id: string } }) {
 
         <div className='flex flex-col w-full md:w-1/2 gap-y-6'>
           <InvestNow fund={fundData!} />
-          <p className='text-lg uppercase '> Latest repayments</p>
-          <div className='card2'>
-            <Activity />
-          </div>
+          <Activity symbol={parseBytes32(id)} />
         </div>
       </div>
       <p className='text-lg uppercase '> Recent Transactions</p>
       <div className='card2'>
-        <Transactions />
+        <Transactions symbol={parseBytes32(id)} />
       </div>
     </>
   );

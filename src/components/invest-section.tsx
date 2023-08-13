@@ -6,13 +6,12 @@ import {
   useContractWrite,
   useContractRead,
   useAccount,
-  useContractInfiniteReads,
 } from 'wagmi';
 
 import { BaseFiFundManager } from '@/contracts/BaseFiFundManager';
 import { BaseFiUSD } from '@/contracts/BaseFiUSD';
 import { BASEFI_FUND_MANAGER, BASEFI_USD } from '@/contracts/addresses';
-import { Fund, FundDeployed, parseBytes32 } from '@/service/fund';
+import { Fund, parseBytes32 } from '@/service/fund';
 
 export default function InvestNow({ fund }: { fund: Fund }) {
   const [srAmount, setSrAmount] = useState(0);
@@ -23,12 +22,14 @@ export default function InvestNow({ fund }: { fund: Fund }) {
     address: BASEFI_USD,
     abi: BaseFiUSD,
     functionName: 'balanceOf',
+    watch: true,
     args: [address || '0x'],
   });
   const { data: allowance } = useContractRead({
     address: BASEFI_USD,
     abi: BaseFiUSD,
     functionName: 'allowance',
+    watch: true,
     args: [address || '0x', BASEFI_FUND_MANAGER],
   });
 
@@ -38,7 +39,7 @@ export default function InvestNow({ fund }: { fund: Fund }) {
     functionName: 'approve',
   });
 
-  const { config: configSr, error } = usePrepareContractWrite({
+  const { config: configSr } = usePrepareContractWrite({
     address: BASEFI_FUND_MANAGER,
     abi: BaseFiFundManager,
     functionName: 'invest',
@@ -68,11 +69,11 @@ export default function InvestNow({ fund }: { fund: Fund }) {
         <div className='flex flex-row justify-between uppercase'>
           <div className='uppercase'>
             <p className='text-lg font-bold'>Senior apy</p>
-            <p className='mt-1 text-6xl font-light'>{fund.srAPY}%</p>
+            <p className='mt-1 text-6xl font-light'>{fund?.srAPY}%</p>
           </div>
           <div className='uppercase'>
             <p className='text-sm'>Loan to value</p>
-            <p className='mt-1 text-3xl '>{fund.ltv}%</p>
+            <p className='mt-1 text-3xl '>{fund?.ltv}%</p>
           </div>
         </div>
         <div className='flex h-20 w-full px-6 rounded-full border-4 border-primary-100 hover:border-primary-200 shadow-[inset_0_-5px_15px_rgba(0,0,256,0.3)] '>
@@ -95,7 +96,7 @@ export default function InvestNow({ fund }: { fund: Fund }) {
             max
           </button>
         </div>
-        {allowance && srAmount > allowance ? (
+        {allowance != undefined && BigInt(srAmount) * 10n ** 18n > allowance ? (
           <button
             type='button'
             onClick={() => {
@@ -105,12 +106,12 @@ export default function InvestNow({ fund }: { fund: Fund }) {
             }}
             className='mt-4 bg-primary disabled:bg-primary-300 h-12 w-full enabled:hover:bg-primary-600 text-white py-2 text-center rounded-full'
           >
-            <p>Approve</p>
+            <p>Increase Allowance</p>
           </button>
         ) : (
           <button
             type='button'
-            disabled={!investSr || !allowance || srAmount > allowance}
+            disabled={!investSr}
             onClick={() => {
               investSr?.();
             }}
@@ -147,7 +148,7 @@ export default function InvestNow({ fund }: { fund: Fund }) {
             max
           </button>
         </div>
-        {allowance && jrAmount > allowance ? (
+        {allowance != undefined && BigInt(jrAmount) * 10n ** 18n > allowance ? (
           <button
             type='button'
             onClick={() => {
