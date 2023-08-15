@@ -29,9 +29,11 @@ export function Activity({ symbol }: { symbol: `0x${string}` }) {
 
   const update = useCallback(
     async (client: PublicClient) => {
-      const res = await getFundInvestments(client, { symbol, user: address });
-      res.reverse();
-      setFundInvestments(res);
+      if (address && symbol) {
+        const res = await getFundInvestments(client, { symbol, user: address });
+        res.reverse();
+        setFundInvestments(res);
+      }
     },
     [address, symbol]
   );

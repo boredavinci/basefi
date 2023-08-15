@@ -29,7 +29,7 @@ const { chains, publicClient, webSocketPublicClient } = configureChains(
   [
     jsonRpcProvider({
       rpc: (chain) => ({
-        http: `https://cool-frequent-road.base-goerli.discover.quiknode.pro/52487125aa0bec31bc84dccec4508ad45c05c5d2/`,
+        http: `https://base-goerli.gateway.tenderly.co/70RC2KS6dFOyzmMld6qc6g`,
       }),
     }),
     // publicProvider(),
