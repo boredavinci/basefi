@@ -24,6 +24,7 @@ export default function InvestNow({ fund }: { fund: Fund }) {
     functionName: 'balanceOf',
     watch: true,
     args: [address || '0x'],
+    enabled: !!address,
   });
   const { data: allowance } = useContractRead({
     address: BASEFI_USD,
@@ -31,6 +32,7 @@ export default function InvestNow({ fund }: { fund: Fund }) {
     functionName: 'allowance',
     watch: true,
     args: [address || '0x', BASEFI_FUND_MANAGER],
+    enabled: !!address,
   });
 
   const { write: approve } = useContractWrite({

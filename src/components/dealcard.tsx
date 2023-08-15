@@ -16,6 +16,7 @@ export default function DealCard({ fund }: { fund: FundDeployed }) {
     functionName: 'fundMap',
     args: [parseBytes32(fund.symbol || '')],
     select: parseFund,
+    enabled: !!fund.symbol,
   });
 
   if (!fundData) return null;
